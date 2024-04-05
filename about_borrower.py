@@ -3,6 +3,7 @@ import plotly.graph_objects as go
 import sql_commond as sc
 import pandas as pd
 import warnings
+
 warnings.filterwarnings('ignore')
 
 
@@ -99,13 +100,13 @@ sperate_late_fig.update_layout(height=500,width=1900) #調整fig的大小
 
 #叫資料
 #借款人行為
-nomal = pd.read_excel('normal.xlsx')
+nomal = pd.read_excel(r'data/normal.xlsx')
 nomal = nomal.groupby('YM')['CNT'].agg('sum').reset_index()
-late = pd.read_excel('late.xlsx')
+late = pd.read_excel(r'data/late.xlsx')
 late = late.groupby('YM')['CNT'].agg('sum').reset_index()
-no_pay = pd.read_excel('nopay.xlsx')
+no_pay = pd.read_excel(r'data/nopay.xlsx')
 no_pay = no_pay.groupby('YM')['CNT'].agg('sum').reset_index()
-Prepaid = pd.read_excel('prepay.xlsx')
+Prepaid = pd.read_excel(r'data/prepay.xlsx')
 Prepaid = Prepaid.groupby('YM')['CNT'].agg('sum').reset_index()
 
 
@@ -113,15 +114,15 @@ Prepaid = Prepaid.groupby('YM')['CNT'].agg('sum').reset_index()
 
 #案件按照最後一次繳款狀態分類
 
-case_status_now = pd.read_excel('case_status.xlsx')
+case_status_now = pd.read_excel(r'data/case_status.xlsx')
 
 
 
 #借款人行為2 (拆信房)
-separate_normal = pd.read_excel('normal.xlsx')
-separate_late = pd.read_excel('late.xlsx')
-separate_no_pay = pd.read_excel('nopay.xlsx')
-separate_Prepaid = pd.read_excel('prepay.xlsx')
+separate_normal = pd.read_excel(r'data/normal.xlsx')
+separate_late = pd.read_excel(r'data/late.xlsx')
+separate_no_pay = pd.read_excel(r'data/nopay.xlsx')
+separate_Prepaid = pd.read_excel(r'data/prepay.xlsx')
 
 #正常繳款
 credit_normal = separate_normal.loc[separate_normal['type']=='信',['YM','CNT']]

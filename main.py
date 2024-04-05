@@ -8,6 +8,7 @@ import about_borrower as borrower
 import about_case as case
 import about_platform as platform
 import about_platform_group as platform_group
+from data import *
 
 import warnings
 warnings.filterwarnings('ignore')

@@ -5,6 +5,7 @@ from scipy.stats import bernoulli
 from scipy.stats import beta
 import numpy as np
 
+
 def default_distribution(n,y):
 
     a0 = 0.5 #alpha 先驗

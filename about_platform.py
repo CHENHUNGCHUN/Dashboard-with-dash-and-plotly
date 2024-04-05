@@ -5,6 +5,7 @@ import datetime
 import pandas as pd
 import sql_commond as sc
 
+
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -51,23 +52,23 @@ figure_about_fee.update_layout(height=600,width=1900) #調整fig的大小
 ############################################################################################################################################
 #讀事件excel檔
 
-day_period = pd.read_excel('day_period.xlsx')
+day_period = pd.read_excel(r'data/day_period.xlsx')
 
-fee = pd.read_excel('fee.xlsx')
+fee = pd.read_excel(r'data/fee.xlsx')
 
-appropriation_credit= pd.read_excel('appropriation_credit.xlsx')
+appropriation_credit= pd.read_excel(r'data/appropriation_credit.xlsx')
 
-appropriation_house = pd.read_excel('appropriation_house.xlsx')
+appropriation_house = pd.read_excel(r'data/appropriation_house.xlsx')
 
-main_case_data = pd.read_excel('main_case_data.xlsx')
+main_case_data = pd.read_excel(r'data/main_case_data.xlsx')
 
-fee_data = pd.read_excel('fee_data.xlsx')
+fee_data = pd.read_excel(r'data/fee_data.xlsx')
 fee_data_credit = fee_data.loc[fee_data['type']=='信']
 fee_data_house = fee_data.loc[fee_data['type']=='房']
 total_fee = fee_data.groupby('YM')['項目A','項目B','項目C','項目D'].agg('sum').reset_index()
 total_fee['總營收'] = total_fee.iloc[:,1:].apply(lambda x:x.sum(),axis=1)
 
-case_status2 = pd.read_excel('case_status2.xlsx')
+case_status2 = pd.read_excel(r'data/case_status2.xlsx')
 
 
 #畫圖圖

@@ -78,11 +78,11 @@ figure_mgm = make_subplots(rows=2,cols=2,
                     )
 figure_mgm.update_layout(height=800,width=1900) #調整fig的大小
 #######################################################################################################################################
-buuny_df3 = pd.read_excel('buuny_df3.xlsx')
-buuny_df3_2 =pd.read_excel('buuny_df3_2.xlsx')
-gina_df3 =pd.read_excel('gina_df3.xlsx')
-vip_df3 = pd.read_excel('vip_df3.xlsx')
-mgm_df =pd.read_excel('mgm_df.xlsx')
+buuny_df3 = pd.read_excel(r'data/buuny_df3.xlsx')
+buuny_df3_2 =pd.read_excel(r'data/buuny_df3_2.xlsx')
+gina_df3 =pd.read_excel(r'data/gina_df3.xlsx')
+vip_df3 = pd.read_excel(r'data/vip_df3.xlsx')
+mgm_df =pd.read_excel(r'data/mgm_df.xlsx')
 
 #######################################################################################################################################
 

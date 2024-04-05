@@ -6,6 +6,7 @@ from  datetime import datetime,timedelta
 from dateutil.relativedelta import relativedelta
 import numpy as np
 
+
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -173,20 +174,20 @@ sleep = make_subplots(rows=3,cols=3,
 ##############################################################
 
 #小金認購速度
-fig2_data = pd.read_excel('fig2_data.xlsx')
+fig2_data = pd.read_excel(r'data/fig2_data.xlsx')
 
 
 #小金每月行為 
 #每個投資人的每月的每項行為都只會認列一個,故組合也只會有一個。 ex:A 入金+交易,則僅會列入"入金+交易"的行為,不會再列入"入金"或"交易"
-behaviers = pd.read_excel('behaviers.xlsx')
+behaviers = pd.read_excel(r'data/behaviers.xlsx')
 behaviers_table_pct = behaviers.copy().apply(lambda x :round(x/x['總人數']*100,2) ,axis=1)
 behaviers_table_pct = behaviers_table_pct.iloc[:,:-1]
 
 #小金每月認購金額
-invest_1_bar_table = pd.read_excel('invest_1_bar_table.xlsx')
+invest_1_bar_table = pd.read_excel(r'data/invest_1_bar_table.xlsx')
 
 #小金購買案件傾向
-df = pd.read_excel('pie.xlsx')
+df = pd.read_excel(r'data/pie.xlsx')
 pie = []
 for time in ("202312","202311","202310","202309"):
     pie.append(df.loc[df['銷帳時間']==time,])
@@ -224,7 +225,7 @@ fig2.update_layout(height=500,width=2000,legend=dict(orientation="h",yanchor='to
 
 
 #fig4 小金每月出入金
-x0 = pd.read_excel('x0.xlsx')
+x0 = pd.read_excel(r'data/x0.xlsx')
 x2 = x0.groupby('YM')['小金_總金額'].agg('sum').reset_index().sort_values('YM')
 x2['cumsum'] = x2['小金_總金額'].cumsum()
 x2['Color'] = np.where(x2['小金_總金額']<0,'red','rgb(0,0,255)')
@@ -237,7 +238,7 @@ fig4.update_layout(legend=dict(orientation="h",yanchor='top',y=1.1,xanchor='righ
 
 
 #inorout 小金每月出入金拆細節
-inandout_df = pd.read_excel('x0.xlsx')
+inandout_df = pd.read_excel(r'data/x0.xlsx')
 inandout_df = inandout_df.sort_values('YM')
 inorout.add_trace(go.Bar(y =inandout_df.loc[inandout_df['remake']=='匯入資金','小金_總金額'] ,x = inandout_df.loc[inandout_df['remake']=='匯入資金','YM'],showlegend = False,name ='/month') , row=1 , col=1) # mode = 'lines'
 inorout.add_trace(go.Scatter(y =inandout_df.loc[inandout_df['remake']=='匯入資金','小金_總金額'].rolling(6).mean() ,x = inandout_df.loc[inandout_df['remake']=='匯入資金','YM'],mode = 'lines',showlegend = False,name ='/month') , row=1 , col=1)
@@ -248,7 +249,7 @@ inorout.update_layout(height=500,width=1900,xaxis_showgrid=False, yaxis_showgrid
 
 
 #fig5 小金帳戶餘額
-df3 = pd.read_excel('df3.xlsx')
+df3 = pd.read_excel(r'data/df3.xlsx')
 fig5.add_trace(go.Table(header=dict(values=[column for column in df3.columns]), cells = dict(values=[df3[column] for column in df3.columns])),row=1 , col=1)
 fig5.add_trace(go.Scatter(y =df3['小金帳戶餘額'] ,x = df3['date'],mode = 'lines',name ='小金帳戶餘額' ) , row=1 , col=2)
 fig5.add_trace(go.Scatter(x = df3['date'],
@@ -260,7 +261,7 @@ fig5.update_layout(height=500,width=2000,legend=dict(orientation="h",yanchor='to
 
 
 #fig15 小金週購買
-week = pd.read_excel('week.xlsx')
+week = pd.read_excel(r'data/week.xlsx')
 
 week1 = week.loc[week['type'] == 1,['day_of_week','小金投資金額']]
 week_las_week = week.loc[week['type'] == 2,['day_of_week','小金投資金額']]
@@ -274,7 +275,7 @@ fig15.update_layout(legend=dict(orientation="h",yanchor='top',y=1.1,xanchor='rig
 
 
 #fig16 小金月購買
-month = pd.read_excel('month.xlsx')
+month = pd.read_excel(r'data/month.xlsx')
 fig16.add_trace(go.Table(header=dict(values=[column for column in month.columns]), cells = dict(values=[month[column] for column in month.columns])),row=1 , col=1)
 fig16.add_trace(go.Scatter(y =month['小金投資金額'] ,x = month['M'],mode = 'lines',name ='mean' ) , row=1 , col=2)
 year_list = month['Y'].unique()
@@ -306,7 +307,7 @@ inv_habit.update_layout(
 
 
 #sleep 沉睡客戶
-sleep_cus = pd.read_excel('sleep_cus.xlsx')
+sleep_cus = pd.read_excel(r'data/sleep_cus.xlsx')
 sleep.add_trace(go.Table(header=dict(values=[column for column in sleep_cus.columns] , align='center'),  #fill_color = 'paleturquoise'
                         cells = dict(values=[sleep_cus[column] for column in sleep_cus.columns] , align='center')), row=1 , col=1) #fill_color = 'lavender' ,
 sleep.add_trace(go.Scatter(x = sleep_cus['times'],
@@ -320,7 +321,7 @@ sleep.update_layout(height=500,width=2000,legend=dict(orientation="h",yanchor='t
 
 
 #每月新交易會員廣告來源
-newMember_ws = pd.read_excel('newMember_ws.xlsx')
+newMember_ws = pd.read_excel(r'data/newMember_ws.xlsx')
 trance0 = go.Table(header=dict(values=[column for column in newMember_ws.columns] ,align='center'), 
                         cells = dict(values=[newMember_ws[column] for column in newMember_ws.columns], align='center'))
 layout = go.Layout(title={'text':'每月新交易會員廣告來源','y':0.85,'x':0.5,'xanchor':'center','yanchor': 'top'})
@@ -328,7 +329,7 @@ fig_newMember_ws = go.Figure(data = [trance0], layout=layout)
 
 
 #每月留存率
-serviver_df = pd.read_excel('serviver_df.xlsx')
+serviver_df = pd.read_excel(r'data/serviver_df.xlsx')
 trance0 = go.Table(header=dict(values=[column for column in serviver_df.columns] ,align='center'), 
                         cells = dict(values=[serviver_df[column] for column in serviver_df.columns], align='center'))
 layout = go.Layout(title={'text':'客戶留存率','y':0.85,'x':0.5,'xanchor':'center','yanchor': 'top'})
@@ -336,7 +337,7 @@ fig_servive = go.Figure(data = [trance0], layout=layout)
 
 
 #最後一筆交易距離今天天數
-last_purchase_df = pd.read_excel('last_purchase_df.xlsx')
+last_purchase_df = pd.read_excel(r'data/last_purchase_df.xlsx')
 trance0 = go.Bar(y = last_purchase_df['距離上次購買的天數'],
                       x = last_purchase_df['CNT'],
                       orientation='h' ,textposition = 'inside',showlegend=False ,text= last_purchase_df['CNT'],
@@ -347,7 +348,7 @@ fig_last_purchase.update_layout(xaxis_showgrid=False, yaxis_showgrid=False)
 
 
 #CAI
-cai_df = pd.read_excel('cai_df.xlsx')
+cai_df = pd.read_excel(r'data/cai_df.xlsx')
 trance0 = go.Scatter(x = cai_df['date'],
                       y = cai_df['nagative'],showlegend = True,name ='nagative',mode = 'lines')
 trance01 = go.Scatter(x = cai_df['date'],
@@ -360,7 +361,7 @@ fig_cai.update_layout(legend=dict(orientation="h",yanchor='top',y=1.1,xanchor='a
 
 
 #忠誠客戶
-loyalty = pd.read_excel('loyalty.xlsx')
+loyalty = pd.read_excel(r'data/loyalty.xlsx')
 trance0 = go.Bar(y = loyalty['等級'],
                       x = loyalty['CNT'],
                       orientation='h' ,textposition = 'inside',showlegend=False ,text=loyalty.values,

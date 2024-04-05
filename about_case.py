@@ -6,6 +6,7 @@ import pandas as pd
 import utility as u 
 import numpy_financial as npf
 
+
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -77,7 +78,7 @@ about_return.update_layout(font=dict(size=20))
 #叫資料
 #呆帳率計算
 
-defualt_table = pd.read_excel('defualt_table.xlsx')
+defualt_table = pd.read_excel(r'data/defualt_table.xlsx')
 
 
 total_case_number = 68853
@@ -87,7 +88,7 @@ x_default,y_default = sc.default_distribution(total_case_number,defualt_case_num
 
 
 
-df_forecast_summary = pd.read_excel('df_forecast_summary.xlsx')
+df_forecast_summary = pd.read_excel(r'data/df_forecast_summary.xlsx')
 df_forecast30 = df_forecast_summary[['本月預計尚有金額']]
 df_forecast_summary = df_forecast_summary[['總逾催金額']]
 
@@ -95,9 +96,9 @@ df_forecast_summary = df_forecast_summary[['總逾催金額']]
 
 
 #案件分布狀態
-number = pd.read_excel('number.xlsx')
-rate = pd.read_excel('rate.xlsx')
-combin = pd.read_excel('combin.xlsx')
+number = pd.read_excel(r'data/number.xlsx')
+rate = pd.read_excel(r'data/rate.xlsx')
+combin = pd.read_excel(r'data/combin.xlsx')
 
 #期數
 _ = np.sum(number['件數'])
@@ -119,15 +120,15 @@ combin = combin.sort_values('件數',ascending=False)
 
 #每月上架總數及總量
 
-case_summary = pd.read_excel('case_summary.xlsx')
+case_summary = pd.read_excel(r'data/case_summary.xlsx')
 
 
 #逾催30天明細
 
-defualt_30_detail = pd.read_excel('defualtMaturity_30_combine.xlsx')
+defualt_30_detail = pd.read_excel(r'data/defualtMaturity_30_combine.xlsx')
 
 #by案件到期的逾催狀況(合併用)
-defualtMaturity_30_combine = pd.read_excel('defualtMaturity_30_combine.xlsx')
+defualtMaturity_30_combine = pd.read_excel(r'data/defualtMaturity_30_combine.xlsx')
 defualtMaturity_30_credit = defualtMaturity_30_combine.loc[defualtMaturity_30_combine['type'] == '信',:]
 defualtMaturity_30_house = defualtMaturity_30_combine.loc[defualtMaturity_30_combine['type'] == '房']
 
@@ -193,7 +194,7 @@ maturityPayback_df = pd.DataFrame(maturityPayback_dict).T
 # print(maturityPayback_df)
 
 
-writer = pd.ExcelWriter(r"C:\Users\kojun\Desktop\dashboard\年金報酬率彙整.xlsx")  
+writer = pd.ExcelWriter(r"C:\Users\kojun\Desktop\dashboard\data\年金報酬率彙整.xlsx")  
 for df,sheetname in zip([principalAndInterestePayack_df,maturityPayback_df],['本息均攤','到期還本']):
     df.to_excel(writer,sheet_name = str(sheetname), header = df.columns, index = False) 
 writer.close() 
